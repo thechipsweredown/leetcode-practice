@@ -81,7 +81,7 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        String[] array = {"111","1000","1000","1000"};
+        String[] array = {"111","000","1000","1000"};
         System.out.println(new Solution().findMaxForm(array,9,3));
     }
 }
