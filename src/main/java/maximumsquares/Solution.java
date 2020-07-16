@@ -6,58 +6,37 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 class Solution {
-    public int matchPair(Pair<Integer,Integer> p1, Pair<Integer,Integer> p2){
-        int p1y = (p1.getKey() + p1.getValue() - 1);
-        int p1x = p1.getKey();
-
-        int p2y = (p1.getKey() + p1.getValue() - 1);
-        int p2x = p1.getKey();
-
-        int max;
-
-        if(p1x >= p2x && p1y <= p2y){
-            max = p1.getValue();
-        }else if(p2x >= p1x && p2y <= p1y){
-            max = p2.getValue();
-        }else if(p1y < p2y){
-            max = p1y - p2x + 1;
-        }else{
-            max = p2y - p1x + 1;
-        }
-
-        return max;
-    }
     public int maximalSquare(char[][] matrix) {
-        HashMap<Integer, ArrayList<Pair<Integer,Integer>>> map = new HashMap<>();
+        HashMap<Integer,ArrayList<Pair<Integer,Integer>>> angle = new HashMap<>();
         int[] max = new int[matrix.length+1];
-        for(int i=0; i< matrix.length;i++){
-            int l = 0;
-            for(int j=0; j<matrix[i].length;j++){
-                if((i == 0 || !map.containsKey(i - 1)) && matrix[i][j] == '1'){
-                    max[i+1] = 1;
+        for(int i = 0; i < matrix.length;i++){
+            ArrayList<Pair<Integer,Integer>> list = new ArrayList<>();
+            boolean isUp = false;
+            for(int j = 0; j < matrix[i].length;j++){
+                if((i==0 || !angle.containsKey(i)) && matrix[i][j] == '1'){
+                    isUp = true;
+                    if(j < matrix[i].length - 1 || i < matrix.length - 1)  list.add(new Pair<>(i,j));
+                    if(list.size() > 0) angle.put(i+1,list);
+                }else{
                 }
-                if(matrix[i][j] == '1'){
-                    l++;
-                }
-                if((j == matrix[i].length - 1  || matrix[i][j+1] == '0') && l != 0){
-                    if(map.containsKey(i+1)){
-                        map.get(i+1).add(new Pair<>(j-l+1,l));
-                    }else{
-                        ArrayList<Pair<Integer,Integer>> list = new ArrayList<>();
-                        list.add(new Pair<>(j-l+1,l));
-                        map.put(i+1,list);
+            }
+            ArrayList<Pair<Integer,Integer>> tmp = angle.get(i);
+            for(Pair<Integer,Integer> p : tmp){
+                int x = p.getKey() + 1;
+                int y = p.getValue() + 1;
+                if(matrix[x][y] == '1'){
+                    int m = max[i-1];
+                    boolean tmpUp = true;
+                    for(int k = m; k > 0; k--){
+                        if(matrix[x][y-k] == '0' || matrix[x=k][y] == '0'){
+                            tmpUp = false;
+                            break;
+                        }
                     }
-                    l = 0;
                 }
             }
-            if(i > 0){
-                if(!map.containsKey(i+1)){
-                    max[i] = 0;
-                }else{{
-
-                }}
-            }
-
+            if(isUp) max[i+1] = max[i] + 1;
+            else max[i+1] = 0;
         }
         return 0;
     }
