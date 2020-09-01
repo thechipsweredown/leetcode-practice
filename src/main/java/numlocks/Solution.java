@@ -34,8 +34,7 @@ class Result {
                     break;
                 default:
                     if (!numlock && set.contains(c)) continue;
-                    if(cur == 0)
-                        list.add(0,Character.toString(c));
+                    if(cur == 0) list.add(0,Character.toString(c));
                     else if(cur == list.size()) list.add(Character.toString(c));
                     else list.add(cur, Character.toString(c));
                     cur += 1;
