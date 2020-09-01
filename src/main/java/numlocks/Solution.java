@@ -1,28 +1,17 @@
 package numlocks;
 
-import com.sun.deploy.util.StringUtils;
-
 import java.io.*;
 import java.util.*;
 
 
 class Result {
-
-    public static String charRemoveAt(String str, int p) {
-        if(p > 5) return str.substring(0, p)+str.substring(p+1);
-        else return "";
-    }
-
-    public static String insertAt(String str, int p, Character c) {
-        return str.substring(0, p)+c+str.substring(p);
-    }
-
+    
     public static String receivedText(String S) {
         Character[] array = {'0','1','2','3','4','5','6','7','8','9'};
         List<Character> temp = Arrays.asList(array);
         HashSet<Character> set = new HashSet<>(temp);
 
-        ArrayList<String> list = new ArrayList<>();
+        LinkedList<String> list = new LinkedList<>();
         int cur = 0;
         boolean numlock = true;
 
@@ -45,14 +34,15 @@ class Result {
                     break;
                 default:
                     if (!numlock && set.contains(c)) continue;
-                    if(cur == 0) list.add(0,Character.toString(c));
+                    if(cur == 0)
+                        list.add(0,Character.toString(c));
                     else if(cur == list.size()) list.add(Character.toString(c));
                     else list.add(cur, Character.toString(c));
                     cur += 1;
                     break;
             }
         }
-        return StringUtils.join(list,"");
+        return String.join("",list);
     }
 
 }
