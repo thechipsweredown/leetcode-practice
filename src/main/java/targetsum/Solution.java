@@ -17,6 +17,7 @@ public class Solution {
         int psum = (sum + S)/2;
 
         if(Math.floor(psum) != psum) return 0;
+        
         int[] dp = new int[psum+1];
         int[] c = new int[psum+1];
 
