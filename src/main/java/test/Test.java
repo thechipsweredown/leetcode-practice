@@ -23,15 +23,6 @@ public class Test {
     
     public static void main(String[] args) {
         Comparator<Name> comparator = Comparator.comparing(Name::getName);
-        TreeMap<Name, Integer> map = new TreeMap<>(comparator);
-    
-        TreeMap<Name, Integer> map1 = new TreeMap<>(map);
-        map1.put(new Name("b"), 1);
-        map1.put(new Name("a"), 1);
-    
-        System.out.println(map1.firstKey().getName());
-        HashMap<Integer,Integer> map2 = new HashMap<>();
-        long a = 109/36;
-        System.out.println(a);
+        System.out.println(Math.ceil(0.4));
     }
 }
