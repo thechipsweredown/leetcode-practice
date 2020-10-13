@@ -1,13 +1,34 @@
 package maximumsquares;
 
-import javafx.util.Pair;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.stream.Collectors;
-
 class Solution {
+    public static class Pair<K, V> {
+
+        private final K element0;
+        private final V element1;
+
+        public static <K, V> Pair<K, V> createPair(K element0, V element1) {
+            return new Pair<K, V>(element0, element1);
+        }
+
+        public Pair(K element0, V element1) {
+            this.element0 = element0;
+            this.element1 = element1;
+        }
+
+        public K getKey() {
+            return element0;
+        }
+
+        public V getValue() {
+            return element1;
+        }
+
+    }
     public int maximalSquare(char[][] matrix) {
         HashMap<Integer,ArrayList<Pair<Pair<Integer,Integer>,Integer>>> angle = new HashMap<>();
         int[] max = new int[matrix.length+1];
