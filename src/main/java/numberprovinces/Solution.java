@@ -27,8 +27,8 @@ public class Solution {
                 List<Integer> wait = new ArrayList<>(graph.get(i));
                 while(wait.size() > 0){
                     int first = wait.get(0);
-                    if(visited.contains(first)) wait.remove(0);
-                    else{
+                    wait.remove(0);
+                    if(!visited.contains(first)){
                         visited.add(first);
                         Set<Integer> com = graph.get(first);
                         wait.addAll(com);
@@ -39,7 +39,6 @@ public class Solution {
         }
         return numProvinces;
     }
-
     public static void main(String[] args) {
         int[][] arr =  {{1,1,1,1,0,0,0,0},
                         {1,1,0,0,0,0,0,0},
